@@ -1,0 +1,88 @@
+#include <iostream>
+#include <iomanip>
+
+class TemperatureConverter {
+public:
+    static double CelsiusToFahrenheit(double celsius) {
+        return (celsius * 9.0 / 5.0) + 32.0;
+    }
+
+    static double CelsiusToKelvin(double celsius) {
+        return celsius + 273.15;
+    }
+
+    static double FahrenheitToCelsius(double fahrenheit) {
+        return (fahrenheit - 32.0) * 5.0 / 9.0;
+    }
+
+    static double FahrenheitToKelvin(double fahrenheit) {
+        return (fahrenheit - 32.0) * 5.0 / 9.0 + 273.15;
+    }
+
+    static double KelvinToCelsius(double kelvin) {
+        return kelvin - 273.15;
+    }
+
+    static double KelvinToFahrenheit(double kelvin) {
+        return (kelvin - 273.15) * 9.0 / 5.0 + 32.0;
+    }
+};
+
+int main() {
+    double temperature;
+    char inputScale, outputScale;
+
+    std::cout << "Temperature Converter\n";
+    std::cout << "Enter the temperature value: ";
+    std::cin >> temperature;
+
+    std::cout << "Enter the input scale (C for Celsius, F for Fahrenheit, K for Kelvin): ";
+    std::cin >> inputScale;
+
+    std::cout << "Enter the output scale (C for Celsius, F for Fahrenheit, K for Kelvin): ";
+    std::cin >> outputScale;
+
+    double convertedTemperature;
+
+    switch (inputScale) {
+        case 'C':
+        case 'c':
+            if (outputScale == 'F' || outputScale == 'f') {
+                convertedTemperature = TemperatureConverter::CelsiusToFahrenheit(temperature);
+            } else if (outputScale == 'K' || outputScale == 'k') {
+                convertedTemperature = TemperatureConverter::CelsiusToKelvin(temperature);
+            } else {
+                convertedTemperature = temperature;
+            }
+            break;
+        case 'F':
+        case 'f':
+            if (outputScale == 'C' || outputScale == 'c') {
+                convertedTemperature = TemperatureConverter::FahrenheitToCelsius(temperature);
+            } else if (outputScale == 'K' || outputScale == 'k') {
+                convertedTemperature = TemperatureConverter::FahrenheitToKelvin(temperature);
+            } else {
+                convertedTemperature = temperature;
+            }
+            break;
+        case 'K':
+        case 'k':
+            if (outputScale == 'C' || outputScale == 'c') {
+                convertedTemperature = TemperatureConverter::KelvinToCelsius(temperature);
+            } else if (outputScale == 'F' || outputScale == 'f') {
+                convertedTemperature = TemperatureConverter::KelvinToFahrenheit(temperature);
+            } else {
+                convertedTemperature = temperature;
+            }
+            break;
+        default:
+            std::cerr << "Invalid input scale!" << std::endl;
+            return 1;
+    }
+
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "Converted temperature: " << convertedTemperature << " " << outputScale << "\n";
+
+    return 0;
+}
+``
